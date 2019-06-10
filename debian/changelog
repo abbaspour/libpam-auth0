@@ -1,0 +1,5 @@
+libpam-auth0 (0.1.0) unstable; urgency=low
+
+  * Initial debian packaging.
+
+ -- Amin Abbaspour <amin.abbaspour@auth0.com>  Sun, 06 Jun 2019 12:07:04 +1000

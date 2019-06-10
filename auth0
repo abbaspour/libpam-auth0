@@ -1,0 +1,9 @@
+Name: Auth0 authentication
+Default: yes
+Priority: 128
+
+Auth-Type: Primary
+Auth:
+  [success=end default=ignore] pam_exec.so expose_authtok /var/lib/auth0/pam
+Auth-Initial:
+  [success=end default=ignore] pam_exec.so expose_authtok /var/lib/auth0/pam

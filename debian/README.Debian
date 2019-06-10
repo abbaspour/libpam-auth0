@@ -1,0 +1,13 @@
+README.Debian for libpam-auth0
+==============================
+
+To complete installation of libpam-auth0:
+
+ * Configure /etc/auth0.conf
+
+   A basic configuration is given.  You will want to modify the client and
+   domain as appropriate for your site.
+
+ * Run `pam-auth-update --package` once.
+
+ -- Amin Abbaspour <amin.abbaspour@auth0.com>, 2019-06-06

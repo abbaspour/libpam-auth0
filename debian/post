@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chmod 755 /var/lib/auth0/pam
+chmod 600 /etc/auth0.conf

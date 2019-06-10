@@ -1,0 +1,4 @@
+.idea
+.env
+*.deb
+auth0.conf.amin01

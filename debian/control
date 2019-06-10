@@ -1,0 +1,11 @@
+Package: libpam-auth0
+Version: 0.1.0
+Architecture: all
+Maintainer: Amin Abbaspour <amin.abbaspour@auth0.com>
+Depends: curl, bash (>= 4.2)
+Recommends: libnss-extrausers | libnss-db
+Homepage: https://github.com/abbaspour/libpam-auth0
+Description: PAM auth service using Auth0
+ .
+ Use of libpam-auth0 and libnss-extrausers eliminates the need for using a
+ cache daemon such as nscd with networked NSS modules.
