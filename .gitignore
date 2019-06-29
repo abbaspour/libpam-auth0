@@ -1,4 +1,6 @@
 .idea
 .env
 *.deb
-auth0.conf.amin01
+*.log
+auth0.conf.*
+node_modules

@@ -1,10 +1,10 @@
 #!/bin/bash --noprofile
 
-# --norc --restricted
+# NOTE: this script is for demonetisation only. vulnerable to script injection. use `pam.js` instead
 
-declare LOG_FILE='/var/log/auth0-pam.log'
+declare log_file="${LOG_FILE:-/var/log/auth0-pam.sh.log}"
 
-exec &> >(tee -a "${LOG_FILE}")
+exec &> >(tee -a "${log_file}")
 set -e
 set -u
 set -f
@@ -66,12 +66,6 @@ declare realm=''
 
 [[ -n "${AUTH0_CLIENT_SECRET}" ]] && secret="\"client_secret\": \"${AUTH0_CLIENT_SECRET}\","
 
-#debug "Domain: ${AUTH0_DOMAIN}; Client: ${AUTH0_CLIENT_ID}"
-
-#declare -r BODY=$(printf "{\"grant_type\":\"%s\",%s\"client_id\":\"%s\",%s\"username\":\"%s\",\"scope\":\"none\",\"password\":\"%s\"}" \
-#    "${grant_type}" "${realm:- }" "${AUTH0_CLIENT_ID}" "${secret:- }" "${PAM_USER}" "${PAM_PASSWORD}")
-#debug "Body: ${BODY}"
-
 declare -i -r http_code=$(
     printf "{\"grant_type\":\"%s\",%s\"client_id\":\"%s\",%s\"username\":\"%s\",\"scope\":\"none\",\"password\":\"%s\"}" \
     "${grant_type}" "${realm:- }" "${AUTH0_CLIENT_ID}" "${secret:- }" "${PAM_USER}" "${PAM_PASSWORD}" | \
@@ -83,7 +77,7 @@ declare -i -r http_code=$(
 
 [[ -z ${http_code+x} ]] && error "undefined http_code" ${PAM_SYSTEM_ERR}
 
-debug "domain: ${AUTH0_DOMAIN@Q}, user: ${PAM_USER@Q}, http_code: ${http_code@Q}"
+debug "domain: ${AUTH0_DOMAIN}, user: ${PAM_USER}, http_code: ${http_code}"
 
 [[ ${http_code} == 200 ]] && exit ${PAM_SUCCESS}
 [[ ${http_code} -gt 200 &&  ${http_code} -lt 500 ]] && exit ${PAM_AUTH_ERR}

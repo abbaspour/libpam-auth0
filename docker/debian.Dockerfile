@@ -5,15 +5,19 @@ ARG VERSION
 
 ENV DEBIAN_FRONTEND noninteractive
 
+    #apt-get -y clean && \
+    #rm -rf /var/lib/apt/lists/* && \
+    #apt-get install -y --no-install-recommends nodejs && \
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates openssh-server curl libnss-extrausers && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/* && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs && \
     update-ca-certificates
 
-COPY pam /src/$MODULE-$VERSION/var/lib/auth0/
+COPY pam.js /src/$MODULE-$VERSION/var/lib/auth0/pam
 COPY auth0 /src/$MODULE-$VERSION/usr/share/pam-configs/
-COPY auth0.conf /src/$MODULE-$VERSION/etc/
+COPY auth0.conf.amin01 /src/$MODULE-$VERSION/etc/auth0.conf
 COPY debian /src/$MODULE-$VERSION/DEBIAN
 
 RUN cd /src && dpkg -b $MODULE-$VERSION && dpkg -i $MODULE-$VERSION.deb

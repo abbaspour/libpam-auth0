@@ -4,6 +4,6 @@ Priority: 128
 
 Auth-Type: Primary
 Auth:
-  [success=end default=ignore] pam_exec.so expose_authtok /var/lib/auth0/pam
+  [success=end default=ignore] pam_exec.so expose_authtok log=/var/log/auth0-pam.log /var/lib/auth0/pam
 Auth-Initial:
-  [success=end default=ignore] pam_exec.so expose_authtok /var/lib/auth0/pam
+  [success=end default=ignore] pam_exec.so expose_authtok log=/var/log/auth0-pam.log /var/lib/auth0/pam
