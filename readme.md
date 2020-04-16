@@ -1,4 +1,5 @@
 # PAM powered by Auth0
+[![Build Status](https://travis-ci.org/abbaspour/libpam-auth0.svg?branch=master)](https://travis-ci.org/abbaspour/libpam-auth0)
 
 ### Steps
 

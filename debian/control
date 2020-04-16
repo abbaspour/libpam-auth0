@@ -1,8 +1,8 @@
 Package: libpam-auth0
-Version: 0.1.0
+Version: 0.2.0
 Architecture: all
 Maintainer: Amin Abbaspour <amin.abbaspour@auth0.com>
-Depends: curl, bash (>= 4.2), nodejs
+Depends:
 Recommends: libnss-extrausers | libnss-db
 Homepage: https://github.com/abbaspour/libpam-auth0
 Description: PAM auth service using Auth0

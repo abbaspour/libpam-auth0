@@ -1,0 +1,21 @@
+language: bash
+os:
+- linux
+
+dist: trusty
+
+before_script:
+  - sudo apt-get -y install expect
+  - printf "AUTH0_DOMAIN=%s\nAUTH0_CLIENT_ID=%s\nAUTH0_CLIENT_SECRET=%s\nAUTH0_CONNECTION=%s\n" ${AUTH0_DOMAIN} ${AUTH0_CLIENT_ID} ${AUTH0_CLIENT_SECRET} ${AUTH0_CONNECTION} > auth0.conf
+  - printf "TEST_USER=%s\nTEST_PASS=%s\n" "${TEST_USER}" "${TEST_PASS}" > .env
+  - printf "%s:x:1005:100:null:/tmp:/bin/bash\n" "${TEST_USER}" > extrausers/passwd
+  - printf "%s:*:18052:0:99999:7:::\n" "${TEST_USER}" > extrausers/shadow
+
+script:
+  - make sshd
+  - make test
+  - make stop
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

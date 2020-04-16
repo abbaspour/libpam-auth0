@@ -10,14 +10,20 @@ ENV DEBIAN_FRONTEND noninteractive
     #apt-get install -y --no-install-recommends nodejs && \
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates openssh-server curl libnss-extrausers && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get install -y --no-install-recommends nodejs && \
-    update-ca-certificates
+    apt-get install -y  --no-install-recommends wget gnupg2 apt-transport-https ca-certificates openssh-server libnss-extrausers apt-utils && \
+    sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list' && \
+    sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -'
 
-COPY pam.js /src/$MODULE-$VERSION/var/lib/auth0/pam
+COPY pam.dart /tmp
+
+RUN apt-get update && \
+    apt-get install -y dart && \
+    mkdir -p /src/$MODULE-$VERSION/var/lib/auth0 && \
+    /usr/lib/dart/bin/dart2native /tmp/pam.dart -o /src/$MODULE-$VERSION/var/lib/auth0/pam
+
+#COPY pam.js /src/$MODULE-$VERSION/var/lib/auth0/pam
 COPY auth0 /src/$MODULE-$VERSION/usr/share/pam-configs/
-COPY auth0.conf.amin01 /src/$MODULE-$VERSION/etc/auth0.conf
+COPY auth0.conf /src/$MODULE-$VERSION/etc/auth0.conf
 COPY debian /src/$MODULE-$VERSION/DEBIAN
 
 RUN cd /src && dpkg -b $MODULE-$VERSION && dpkg -i $MODULE-$VERSION.deb

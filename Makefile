@@ -1,5 +1,5 @@
 MODULE := libpam-auth0
-VERSION := 0.1.0
+VERSION := 0.2.0
 
 DEB_FILE := ${MODULE}-${VERSION}.deb
 
@@ -16,9 +16,10 @@ clean:
 	docker run -it -v `pwd`/deb:/deb ${MODULE}:${VERSION} cp ${DEB_FILE} /deb/
 
 sshd: deb/${DEB_FILE}
-	docker run -p 2222:22 -it ${MODULE}:${VERSION} /usr/sbin/sshd -D -e
+	docker run -p 2222:22 -d -it ${MODULE}:${VERSION} /usr/sbin/sshd -D -e
 
 stop:
+	#docker cp `docker ps | awk '/${MODULE}:${VERSION}/{print $$1}'`:/var/log/auth0-pam.log . && cat auth0-pam.log
 	docker kill `docker ps | awk '/${MODULE}:${VERSION}/{print $$1}'`
 
 bash: deb/${MODULE}-${VERSION}.deb
