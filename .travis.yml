@@ -16,6 +16,15 @@ script:
   - make test
   - make stop
 
+deploy:
+  provider: bintray
+  file: "bintray.json"
+  user: "${BINTRAY_USER}"
+  key: "${BINTRAY_API_KEY}"
+  skip_cleanup: true
+  on:
+    all_branches: true
+
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

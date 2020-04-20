@@ -1,0 +1,41 @@
+{
+  "package": {
+    "name": "libpam-auth0",
+    "repo": "libpam-auth0",
+    "subject": "amin",
+    "desc": "I was pushed completely automatically",
+    "website_url": "https://github.com/abbaspour/libpam-auth0",
+    "issue_tracker_url": "https://github.com/abbaspour/libpam-auth0/issues",
+    "vcs_url": "https://github.com/abbaspour/libpam-auth0.git",
+    "github_use_tag_release_notes": true,
+    "github_release_notes_file": "RELEASE.txt",
+    "licenses": [
+      "MIT"
+    ],
+    "labels": [
+      "PAM",
+      "auth0",
+      "Linux",
+      "NSS",
+      "ROPG"
+    ],
+    "public_download_numbers": false,
+    "public_stats": false,
+    "attributes": []
+  },
+  "version": {
+    "name": "0.2.0",
+    "desc": "This is a version",
+    "released": "2020-04-20",
+    "vcs_tag": "0.2.0",
+    "attributes": [],
+    "gpgSign": false
+  },
+  "files": [
+    {
+      "includePattern": "release/(.*\\.deb)",
+      "uploadPattern": "release/$1"
+    }
+  ],
+  "publish": true
+}

@@ -1,7 +1,14 @@
 # PAM powered by Auth0
 [![Build Status](https://travis-ci.org/abbaspour/libpam-auth0.svg?branch=master)](https://travis-ci.org/abbaspour/libpam-auth0)
 
-### Steps
+### Download & Install Binary
+Pre-built binaries available at https://bintray.com/amin/libpam-auth0/libpam-auth0
+
+```bash
+dpkg -i libpam-auth0-0.2.0.deb 
+```
+
+### Build Steps
 
 1. Clone
 ```bash

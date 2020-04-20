@@ -3,4 +3,6 @@
 *.deb
 *.log
 auth0.conf.*
+pam
+release
 node_modules
